@@ -11,8 +11,10 @@ textarea{
   color: #000000;
   border-left: 1px solid black;
   padding: 10px;
+  height: 80px;
 }
 
+/* this applies to all content within the header (which has jumbotron class) */
 .jumbotron {
   text-align: center;
   background-color: transparent;
@@ -24,47 +26,50 @@ textarea{
 .description{
   white-space: pre-wrap;
 }
-
+/* this applies to the entire container where the hour, event, and save button are located for each hour of the day */
 .time-block{
   text-align: center;
   border-radius: 15px;
 }
-
+/* this applies to the event text/whole time block */
 .row {
   white-space: pre-wrap;
-  height: 80px;
   border-top: 1px solid white;;
 }
-
+/* this applies to the hour of each row, located to the left of the row*/
 .hour {
   background-color: #ffffff;
   color: #000000;
   border-top: 1px dashed #000000;
+  height: 80px;
 }
-
+/* this applies to events that are before the current time */
 .past {
   background-color: #d3d3d3;
   color: white;
 }
-
+/* this applies to the event that is the current time */
 .present {
   background-color: #ff6961;
   color: white;
 }
-
+/* this applies to events that are after the current time */
 .future {
   background-color: #77dd77;
   color: white;
 }
-
+/* this applies to the save button located on the right side of the event row (contains the save icon) */
 .saveBtn {
   border-left: 1px solid black;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: #06AED5;
   color: white;
+  padding-left: 0;
+  text-align: justify;
+  height: 80px;
 }
-
+/* this applies when a user hovers their mouse pointer over the save button */
 .saveBtn i:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
