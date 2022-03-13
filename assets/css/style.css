@@ -70,7 +70,7 @@ textarea{
   height: 80px;
 }
 /* this applies when a user hovers their mouse pointer over the save button */
-.saveBtn i:hover {
+.saveBtn:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
 }
