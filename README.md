@@ -27,8 +27,8 @@ THEN the saved events persist
 
 ## Finished Project Links:
 
-URL to site: https:///mfcodingbc.github.io/work-day-scheduler/
+URL to site: https://mfcodingbc.github.io/work-day-scheduler/
 
 URL to GitHub Repository: https://github.com/mfcodingbc/work-day-scheduler
 
-![Finished Site Screenshot](./assets/images/work-day-scheduler-deployed-site-screenshot.PNG
+![Finished Site Screenshot](./assets/images/work-day-scheduler-deployed-site-screenshot.PNG)
