@@ -1,6 +1,6 @@
 **Module 5: Third-Party APIs Challenge: Work Day Scheduler**
 
-
+This week's challenge was to create a Work Day Scheduler using JQuery and Moment.js. Also, inputs made by a user is stored in localStorage and recalled when the user returns to the page through JSON stringify and parse. The user provided code for the CSS and some code for the HTML, though all JavaScript coding was written by myself.
 
 **User Story:**
 
@@ -25,9 +25,9 @@ THEN the text for that event is saved in local storage
 WHEN I refresh the page
 THEN the saved events persist
 
-Finished Project Links:
+## Finished Project Links:
 
-URL to site: https://mfcodingbc.github.io/
+URL to site: https:///mfcodingbc.github.io/work-day-scheduler/
 
 URL to GitHub Repository: https://github.com/mfcodingbc/work-day-scheduler
 
