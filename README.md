@@ -1,5 +1,7 @@
 **Module 5: Third-Party APIs Challenge: Work Day Scheduler**
 
+
+
 **User Story:**
 
 AS AN employee with a busy schedule
@@ -25,17 +27,8 @@ THEN the saved events persist
 
 Finished Project Links:
 
-<!-- URL to site: https://mfcodingbc.github.io/
+URL to site: https://mfcodingbc.github.io/
 
-URL to GitHub Repository: https://github.com/mfcodingbc/
+URL to GitHub Repository: https://github.com/mfcodingbc/work-day-scheduler
 
-![Finished Site Screenshot](./assets/images/ -->
-
-
-<!-- Make a for loop in js, possible to make it all in js (though can make the divs and such in HTML)
-
-else/if statements to add/remove classes
-
-localStorage to keep values
-
-Can use Luxon (other API instead of Moment)-->
+![Finished Site Screenshot](./assets/images/work-day-scheduler-deployed-site-screenshot.PNG

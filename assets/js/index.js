@@ -1,4 +1,4 @@
-// this variable stores an array with every hour and event
+// this variable stores an array which will contain the user data
 var timeBlocks = {};
 
 // this variable selects all timeblocks(rows) and creates an id for each
@@ -31,66 +31,59 @@ var currentDay = moment().format('dddd, MMMM Do');
 // adding this value to header
 currentDayEl.textContent = currentDay;
 
+// loads the user's inputs from localStorage
 var loadTimeBlocks = function() {
     timeBlocks = JSON.parse(localStorage.getItem("timeBlocks"));
 
-    // if nothing in localStorage, create new object to track all timeBlock # Arrays
+    // if nothing in localStorage, create new Array
     if (!timeBlocks) {
         timeBlocks = {};
     }
 
-    console.log(timeBlocks);
-
+    // this places the user inputs back where they where initially inputed
     for (var i = 0; i < timeBlocksSections.length; i++) {
         if (timeBlocks[i] === undefined) {
             timeBlocksEventEl[i].innerHTML = "";
         } else {
             timeBlocksEventEl[i].innerHTML = timeBlocks[i];
         }
-        console.log('timeBlockRow: ', timeBlocks[i]);
     }
 
     auditTimeBlock();
-
-    // for (var i = 0; i < timeBlocks.length; i++) {
-    //     console.log(timeBlocks[i]);
-    //     if (timeBlocks.timeBlock[i] === 
-    //         document.getElementById("timeBlock").innerHTML = timeBlocks;
-    //     } else {
-    //         i++;
-    //     }
-    // };
-
-// looping over object properties
-    // $.each(timeBlocks, function(list, arr) {
-    //     // looping over sub-array
-    //     arr.forEach(function(timeBlock) {
-    //         appendTimeBlock(timeBlock, list);
-    //     });
-    // });
 };
 
+// saves the user inputs into localStorage
 var saveTimeBlocks = function() {
     localStorage.setItem("timeBlocks", JSON.stringify(timeBlocks));
 };
 
 var auditTimeBlock = function() {
-    // get hour from event element
-    // select 'this, go to parent element (section) find the class 'hour' (within 1st div) then take its id attribute
+    // current Time (no date!) used for comparing events to current time for color changes
+    var currentTime = moment().format('H');
 
-    for (var i = 0; i < timeBlocksSaveEl.length; i++) {
-        var time = moment().set('hour', i);
+    // loop through events
+    for (var i = 0; i < timeBlocksEventEl.length; i++) {
+        // get the ids of each event element
+        var timeBlocksEventID = timeBlocksEventEl[i].id;
+
+        // get new element id so it can replace old event id with updated color-coding
+        var timeBlocksEventNewID = document.getElementById(timeBlocksEventEl[i].id);
+
+        // remove the old classes from previous element
+        $(timeBlocksEventEl[i].id).removeClass(".past .present .future");
+
         // apply new class if event is in a past, present, or future hour
-        if (moment().isBefore(time)) {
-            $(timeBlocksEventEl).addClass("future");
-        } else if (moment().isSame(time)) {
-            $(timeBlocksEventEl).addClass("present");
-        } else if (moment().isAfter(time)) {
-            $(timeBlocksEventEl).addClass("past");
+        if (timeBlocksEventID < currentTime) {
+            $(timeBlocksEventNewID).addClass("past");
+        } else if (timeBlocksEventID > currentTime) {
+            $(timeBlocksEventNewID).addClass("future");
+        } else {
+            $(timeBlocksEventNewID).addClass("present");
         }
     }
 };
 
+// when the save button is clicked, this function runs
 $("button").click(function() {
     // select 'this' (the savebutton) and give it its id attribute
     var saveBtnId = $("button").index(this);
