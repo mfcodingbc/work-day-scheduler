@@ -35,55 +35,56 @@ currentDayEl.textContent = currentDay;
 var currentTime = moment().format('LT');
 console.log(currentTime);
 
-var appendTimeBlock = function(timeBlockText, timeBlockList) {
-
-    var eventTextArea = $("<textarea>")
-    .addClass("col-10 lead")
-    .text(timeBlockText);
-
-    $("#event-" + timeBlockList).replaceWith(eventTextArea);
-
-    // run audit function to compare current time with time of events
-}
-
 var loadTimeBlocks = function() {
-    timeBlocks = JSON.parse(localStorage.getItem("timeblocks"));
+    timeBlocks = JSON.parse(localStorage.getItem("timeBlocks"));
 
     // if nothing in localStorage, create new object to track all timeBlock # Arrays
     if (!timeBlocks) {
-        timeBlocks = {
-            timeBlock: []
-        };
+        timeBlocks = {};
     }
 
-    // var data = {row: "col-0", hour: "12 AM", event: "Hello World!"};
+    console.log(timeBlocks);
 
-    // var result = Object.entries(timeBlocks.data);
+    for (var i = 0; i < timeBlocksSections.length; i++) {
+        if (timeBlocks[i] === undefined) {
+            timeBlocksEventEl[i].innerHTML = "";
+        } else {
+            timeBlocksEventEl[i].innerHTML = timeBlocks[i];
+        }
+        console.log('timeBlockRow: ', timeBlocks[i]);
+    }
 
-    // for (var i = 0; i < result.length; i++) {
-    //     for (var z = 0; z < result[i].length; z++) {
-    //         console.log(result[i][z] + " ");
+    // for (var i = 0; i < timeBlocks.length; i++) {
+    //     console.log(timeBlocks[i]);
+    //     if (timeBlocks.timeBlock[i] === 
+    //         document.getElementById("timeBlock").innerHTML = timeBlocks;
+    //     } else {
+    //         i++;
     //     }
-    //     console.log("</br>")
     // };
-        // if (data[i] === timeBlocks.row[i]) {
-        //     timeBlocks = JSON.parse(localStorage.getItem("timeblocks"));
-        // } else {
-        //     i++;
-        // }
 
-
-console.log(timeBlocks);
-
+// looping over object properties
     // $.each(timeBlocks, function(list, arr) {
+    //     // looping over sub-array
     //     arr.forEach(function(timeBlock) {
-    //         appendTimeBlock(timeBlock.text, list);
+    //         appendTimeBlock(timeBlock, list);
     //     });
     // });
 };
 
+var auditTimeBlock = function(timeBlocksSections) {
+    // get hour from section element
+    // select 'this, find the class 'hour' then take its text and trim it
+    var timeBlockHour = $(this)
+    .find(".hour")
+    .text()
+    .trim();
+
+    // 
+};
+
 var saveTimeBlocks = function() {
-    localStorage.setItem("timeblocks", JSON.stringify(timeBlocks));
+    localStorage.setItem("timeBlocks", JSON.stringify(timeBlocks));
 };
 
 $("button").click(function() {
@@ -95,13 +96,6 @@ $("button").click(function() {
     .parent()
     .attr("id");
 
-    // select 'this, go up to parent, find the class 'hour' then take its text and trim it
-    var timeBlockHour = $(this)
-    .parent()
-    .find(".hour")
-    .text()
-    .trim();
-
     // select 'this, go up to parent, find the class 'col-10' then take its value (the user text input)
     var timeBlockEvent = $(this)
     .parent()
@@ -111,10 +105,10 @@ $("button").click(function() {
 
     console.log("That was saveBtn #" + saveBtnId);
 
-    console.log(saveBtnId, timeBlockRow, timeBlockHour, timeBlockEvent);
+    console.log(saveBtnId, timeBlockRow, timeBlockEvent);
 
-    // push the needed variables into the data array inside timeBlocks
-    timeBlocks[timeBlockRow][saveBtnId] = timeBlockEvent;
+    // push the needed variables into the timeBlock array inside timeBlocks
+    timeBlocks[saveBtnId] = timeBlockEvent;
 
     saveTimeBlocks();
 });
