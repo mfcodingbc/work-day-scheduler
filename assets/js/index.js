@@ -31,10 +31,6 @@ var currentDay = moment().format('dddd, MMMM Do');
 // adding this value to header
 currentDayEl.textContent = currentDay;
 
-// current Time (no day!) used for time blocks
-var currentTime = moment().format('LT');
-console.log(currentTime);
-
 var loadTimeBlocks = function() {
     timeBlocks = JSON.parse(localStorage.getItem("timeBlocks"));
 
@@ -54,6 +50,8 @@ var loadTimeBlocks = function() {
         console.log('timeBlockRow: ', timeBlocks[i]);
     }
 
+    auditTimeBlock();
+
     // for (var i = 0; i < timeBlocks.length; i++) {
     //     console.log(timeBlocks[i]);
     //     if (timeBlocks.timeBlock[i] === 
@@ -72,19 +70,25 @@ var loadTimeBlocks = function() {
     // });
 };
 
-var auditTimeBlock = function(timeBlocksSections) {
-    // get hour from section element
-    // select 'this, find the class 'hour' then take its text and trim it
-    var timeBlockHour = $(this)
-    .find(".hour")
-    .text()
-    .trim();
-
-    // 
-};
-
 var saveTimeBlocks = function() {
     localStorage.setItem("timeBlocks", JSON.stringify(timeBlocks));
+};
+
+var auditTimeBlock = function() {
+    // get hour from event element
+    // select 'this, go to parent element (section) find the class 'hour' (within 1st div) then take its id attribute
+
+    for (var i = 0; i < timeBlocksSaveEl.length; i++) {
+        var time = moment().set('hour', i);
+        // apply new class if event is in a past, present, or future hour
+        if (moment().isBefore(time)) {
+            $(timeBlocksEventEl).addClass("future");
+        } else if (moment().isSame(time)) {
+            $(timeBlocksEventEl).addClass("present");
+        } else if (moment().isAfter(time)) {
+            $(timeBlocksEventEl).addClass("past");
+        }
+    }
 };
 
 $("button").click(function() {
@@ -102,10 +106,6 @@ $("button").click(function() {
     .find("textarea")
     .val()
     .trim();
-
-    console.log("That was saveBtn #" + saveBtnId);
-
-    console.log(saveBtnId, timeBlockRow, timeBlockEvent);
 
     // push the needed variables into the timeBlock array inside timeBlocks
     timeBlocks[saveBtnId] = timeBlockEvent;
