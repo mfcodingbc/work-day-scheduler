@@ -71,6 +71,6 @@ textarea{
 }
 /* this applies when a user hovers their mouse pointer over the save button */
 .saveBtn:hover {
-  font-size: 20px;
+  color: black;
   transition: all .3s ease-in-out;
 }

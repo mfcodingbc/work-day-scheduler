@@ -4,7 +4,7 @@ var timeBlocks = {};
 // this variable selects all timeblocks(rows) and creates an id for each
 var timeBlocksSections = document.querySelectorAll('.row');
     for (var i = 0; i < timeBlocksSections.length; i++) {
-        timeBlocksSections[i].id = 'row-' + i;
+        timeBlocksSections[i].id = "timeBlock"
     };
 
 // create and set ids for all hours
@@ -47,31 +47,48 @@ var appendTimeBlock = function(timeBlockText, timeBlockList) {
 }
 
 var loadTimeBlocks = function() {
-
     timeBlocks = JSON.parse(localStorage.getItem("timeblocks"));
 
+    // if nothing in localStorage, create new object to track all timeBlock # Arrays
     if (!timeBlocks) {
         timeBlocks = {
-            data: []
+            timeBlock: []
         };
     }
 
+    // var data = {row: "col-0", hour: "12 AM", event: "Hello World!"};
+
+    // var result = Object.entries(timeBlocks.data);
+
+    // for (var i = 0; i < result.length; i++) {
+    //     for (var z = 0; z < result[i].length; z++) {
+    //         console.log(result[i][z] + " ");
+    //     }
+    //     console.log("</br>")
+    // };
+        // if (data[i] === timeBlocks.row[i]) {
+        //     timeBlocks = JSON.parse(localStorage.getItem("timeblocks"));
+        // } else {
+        //     i++;
+        // }
+
+
 console.log(timeBlocks);
 
-    $.each(timeBlocks, function(list, arr) {
-        arr.forEach(function(timeBlock) {
-            appendTimeBlock(timeBlock.text, list);
-        });
-    });
+    // $.each(timeBlocks, function(list, arr) {
+    //     arr.forEach(function(timeBlock) {
+    //         appendTimeBlock(timeBlock.text, list);
+    //     });
+    // });
 };
 
 var saveTimeBlocks = function() {
     localStorage.setItem("timeblocks", JSON.stringify(timeBlocks));
 };
 
-$("section").on('click', '.saveBtn', function() {
+$("button").click(function() {
     // select 'this' (the savebutton) and give it its id attribute
-    var saveBtnId = $(this).attr("id");
+    var saveBtnId = $("button").index(this);
 
     // select 'this', then go up to parent (the row) and give it its id attribute
     var timeBlockRow = $(this)
@@ -86,19 +103,18 @@ $("section").on('click', '.saveBtn', function() {
     .trim();
 
     // select 'this, go up to parent, find the class 'col-10' then take its value (the user text input)
-    var timeBlockText = $(this)
+    var timeBlockEvent = $(this)
     .parent()
-    .find(".col-10")
-    .val();
+    .find("textarea")
+    .val()
+    .trim();
 
-    console.log(saveBtnId, timeBlockRow, timeBlockHour, timeBlockText);
+    console.log("That was saveBtn #" + saveBtnId);
+
+    console.log(saveBtnId, timeBlockRow, timeBlockHour, timeBlockEvent);
 
     // push the needed variables into the data array inside timeBlocks
-    timeBlocks.data.push({
-        row: timeBlockRow,
-        hour: timeBlockHour,
-        event: timeBlockText
-    })
+    timeBlocks[timeBlockRow][saveBtnId] = timeBlockEvent;
 
     saveTimeBlocks();
 });
